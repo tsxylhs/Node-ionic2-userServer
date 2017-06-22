@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <a href="/uploadimages">上传图片</a>
+    <h3>增加数据</h3>
+    <form action="userregister"  method="post">
+    手机 <input type="text" name="PhoneNumber"><br>
+     密码<input type="passwrd" name="passWord"><br>
+     
+     <input type="submit" value="提交">
+
+
+     </form> 
+     <img style="width:120px;height:auto;" src="/static/images/1495097033074.png" alt="" />
+   
+            <h3>查询数据</h3>
+       <form action="userfind" method="post">
+       手机<input type="text" name="phoneNumber"><br>
+           密码：<input type="password" name="passWord"><br>
+        <input type="submit" value="提交">
+       </form>
+       <h3>删除数据</h3>
+       <form action="usersremove" method="post">
+       姓名<input type="text" name="userName"><br>
+        <input type="submit" value="提交">
+       </form>
+           <h3>更新数据</h3>
+           <form action="userupdata" method="post">
+             更更新谁<input type="text" name="userName"><br>
+            更新的字段<input type="text" name="userage"><br>
+               <input type="submit" valuue="提交">
+            </form>
+
+
+            <form action="messagecheck" method="post">
+               qingshurushoujihao:<input type="text" name="number"><br>
+               <input type="submit" value="submit">
+            </form>
+  </body>
+</html>
