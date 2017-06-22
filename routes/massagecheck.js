@@ -27,7 +27,7 @@ exports.messagecheck= function(req, res, next) {
       }
     }).then(function (data) {
           console.log('sucess');
-          //res.json({'number':number,'success':ok});
+    
     }).catch(function (err) {
       console.log('fail')
     })
