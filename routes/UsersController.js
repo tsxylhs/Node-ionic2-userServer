@@ -26,9 +26,9 @@ exports.phoneCheck=function(req,res,next){
                          }).join('');
 
 
-          //console.log(randomstr);
               var number=req.body.phoneNumber;
-            //     console.log(number);
+              console.log(number);
+  
     client.sms({
       rec_num: number,
       sms_free_sign_name: '泰山',
@@ -39,7 +39,7 @@ exports.phoneCheck=function(req,res,next){
       }
     }).then(function (data) {
           console.log('sucess');
-          res.json({'code':1,avatar:'我是图片路径','number':number,'message':'ok'});
+          res.json({'code':1,'checknumber':randomstr,'success':1});
     }).catch(function (err) {
       console.log('fail')
       res.json({'code':2,'message':'no'});
@@ -58,7 +58,7 @@ exports.register=function(req,res){
       users.push({
           phoneNumber:req.body.PhoneNumber,
           passWord:req.body.passWord,
-          avatar:"http://127.0.0.1:3000/static/images/"+photonumber+".jpeg",
+          avatar:"http://192.168.0.2:3000/static/images/"+photonumber+".jpeg",
            userName:"默认",
            nickName:"默认",
            email:"11111@qq.com",
@@ -92,7 +92,7 @@ exports.finduser=function(req,res){
     })
     
 }
-    exports.updatauser=function(req,res){
+exports.updatauser=function(req,res){
 
         console.log(req.body);
         console.log(req.body._id);

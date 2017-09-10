@@ -20,7 +20,7 @@
     "mongodb-core": "~1.0",
     "mongoose": "4.9.9",
     "morgan": "~1.0.0",
-    "multer": "0.1.6",
+    "multer": "^0.1.6",
     "node-alidayu": "^1.0.0",
     "static-favicon": "~1.0.0"
   }

@@ -13,18 +13,25 @@ var images=require('./routes/images');
 var flash=require('connect-flash');
 var app = express();
   var multipart=require('connect-multiparty');
+  var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
+var shigu=require('./routes/shigu');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 app.use(flash());
 //跨域请求
-
-app.all('*',function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
+//解析 application/x-www-form-urlencoded，limit:'20mb'用于设置请求的大小
+//解决nodejs Error: request entity too large问题
+app.use(bodyParser.urlencoded({ limit:'20mb',extended: true })); 
+//设置跨域访问
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+     res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("Content-Type", "application/json;charset=utf-8");
+  
     if (req.method == 'OPTIONS') {
         res.send(200);
     }
@@ -49,12 +56,23 @@ app.use('/users', userController.adduser);
 app.use('/usersremove',userController.removeuser);
 //app.use('/user/updata',userController.updatauser);
 app.use('/doubleimages',images.doubleimages);
-app.use('/oneimages' , multipart(), images.oneimages);
+app.use('/oneimages' , multipart(),images.imagestest);
 //注册时短信验证   找回密码时短信验证
 app.use('/messagecheck', UserController.phoneCheck);
 //用户登录时路经
 app.use('/userregister',UserController.register);
-
+//头像更改
+app.use('/avatar',images.avatar);
+//事故描述
+app.use('/miaoshu',shigu.sgsm);
+//双方事故图片
+app.use('/shuangfang',images.shuangfang);
+//我方信息
+app.use("/wfxx",shigu.wfxx);
+//对方信息
+app.use("/yfxx",shigu.yfxx);
+//签名
+app.use("/qianming",shigu.qm);
 app.use('/userfind',UserController.finduser);
 //更改用户信息
 app.use('/updateUsers',UserController.updatauser);
